@@ -1,0 +1,39 @@
+env:
+  RCLONECONFIG_DRIVE: ""
+  TG_TOKEN: ""
+  TG_CHAT_ID: ""
+  WORKDIR: "/tmp"
+  CIRRUS_CLONE_DEPTH: "1"
+  username: ""
+  useremail: ""
+  credentials: ""
+
+task:
+  name: "Setting Up, Syncing, Building and Uploading"
+  only_if: $CIRRUS_REPO_OWNER == ''
+  timeout_in: 120m
+  container:
+    image: 
+    cpu: 8
+    memory: 32G
+
+  Load-Ccache_background_script:
+     - ./script/load_ccache.sh
+
+  Sync-rom_script:
+     - git config --global user.name "$username"
+     - git config --global user.email "$useremail"
+     - echo "$credentials" > ~/.git-credentials
+     - git config --global credential.helper store --file=~/.git-credentials
+     - ./script/sync.sh
+     
+  Build-rom_script:
+     - ./script/building.sh
+     
+  Ccache-info_script:
+     - set -e
+     - export CCACHE_DIR=$WORKDIR/ccache
+     - ccache -s
+
+  Upload-build_script:
+     - ./script/ziping.sh
