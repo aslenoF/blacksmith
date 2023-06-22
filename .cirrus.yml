@@ -1,19 +1,19 @@
 env:
-  RCLONECONFIG_DRIVE: ""
-  TG_TOKEN: ""
-  TG_CHAT_ID: ""
+  RCLONECONFIG_DRIVE: "ENCRYPTED[30ba7b815951b1a7e95abb3d3c01ccdf7e11a724fd50dab54bbf64f8d315758364df8a3479602a96f4bee28f309df6b3]"
+  TG_TOKEN: "ENCRYPTED[780cf0d99d04330cf7e611dc39f94a19dbdec84c9d4aea550af69d584aaab40aacc6ef1a846aeb6f82f3edbc8bd2493f]"
+  TG_CHAT_ID: "ENCRYPTED[fa1251c3dbbe2b966a7339ea0463e23af6e1031014efdeaff7c6ebbc2d3d130f6b2cdb894db4ed754b75fd98ee532b42]"
   WORKDIR: "/tmp"
   CIRRUS_CLONE_DEPTH: "1"
-  username: ""
-  useremail: ""
-  credentials: ""
+  username: "ENCRYPTED[3d688011ddf0491ce1585d4896ffe4c2370d5ab557411a2f1216a74f7f1151201c22445c4f52c36679b8710fc60c4b4d]"
+  useremail: "ENCRYPTED[44d7125dc9704d7111854153cac2bc0cd0130c055b8e9c135ab87ba0c441b1264c386c2d393d4f540ef9ac8663234bda]"
+  credentials: "ENCRYPTED[8a4e1f8a581aee7b2672e7861494e9dac79b410379b759908cfe03562bee1b754427932a8da9ff305b08245d5cc0e492]"
 
 task:
   name: "Setting Up, Syncing, Building and Uploading"
-  only_if: $CIRRUS_REPO_OWNER == ''
+  only_if: $CIRRUS_REPO_OWNER == 'aslenoF'
   timeout_in: 120m
   container:
-    image: 
+    image: aslenof/build:aosp
     cpu: 8
     memory: 32G
 
